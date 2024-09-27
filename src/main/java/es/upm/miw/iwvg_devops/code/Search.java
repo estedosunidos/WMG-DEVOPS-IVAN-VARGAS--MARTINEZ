@@ -24,12 +24,17 @@ public class Search {
     }
 
 
-68 / 5.000
     // 0. Find the user's last name if it has any proper fraction
     public Stream<String> findUserFamilyNameInitialBySomeProperFraction() {
         return findAll()
                 .filter(user -> user.getFractions().stream().anyMatch(Fraction::isProper))
                 .map(User::getFamilyName);
+    }
+    // 1. Find the user ID if it has any proper fraction
+    public Stream<String> findUserIdBySomeProperFraction() {
+        return findAll()
+                .filter(user -> user.getFractions().stream().anyMatch(Fraction::isProper))
+                .map(User::getId);
     }
 
 
