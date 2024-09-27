@@ -14,7 +14,7 @@
 
     <artifactId>WMG-DEVOPS-IVAN-VARGAS--MARTINEZ</artifactId>
     <groupId>es.upm.miw</groupId>
-    <version>4.4.0-Release</version>
+    <version>4.4.1-SNAHPTO</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}.${project.artifactId}</name>
