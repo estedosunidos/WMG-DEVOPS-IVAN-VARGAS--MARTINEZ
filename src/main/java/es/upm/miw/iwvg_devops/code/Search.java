@@ -38,11 +38,14 @@ public class Search {
     }
 
     // 2. Multiply user fractions by last name
+
+
     public Fraction findFractionMultiplicationByUserFamilyName(String familyName) {
+        // Se obtiene la lista de usuarios, se filtra por apellido y se reduce multiplicando las fracciones
         return findAll()
-                .filter(user -> user.getFamilyName().equals(familyName))
-                .flatMap(user -> user.getFractions().stream())
-                .reduce(new Fraction(1, 1), Fraction::multiply);
+                .filter(user -> user.getFamilyName().equals(familyName))  // Filtra los usuarios por apellido
+                .flatMap(user -> user.getFractions().stream())  // Mapea las fracciones de cada usuario
+                .reduce(new Fraction(1, 1), Fraction::multiply);  // Multiplica todas las fracciones encontradas
     }
     // 3. Dividir las fracciones del usuario por ID
     public Fraction findFractionDivisionByUserId(String id) {
