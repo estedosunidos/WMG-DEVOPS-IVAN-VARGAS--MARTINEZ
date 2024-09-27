@@ -29,6 +29,9 @@ public class Fraction {
     private int denominator;
 
     public Fraction(int numerator, int denominator) {
+        if (denominator == 0) {
+            throw new IllegalArgumentException("El denominador no puede ser cero.");
+        }
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -50,11 +53,56 @@ public class Fraction {
     }
 
     public void setDenominator(int denominator) {
+        if (denominator == 0) {
+            throw new IllegalArgumentException("El denominador no puede ser cero.");
+        }
         this.denominator = denominator;
     }
 
     public double decimal() {
         return (double) numerator / denominator;
+    }
+
+    public boolean isProper() {
+        return Math.abs(numerator) < Math.abs(denominator);
+    }
+
+    public boolean isImproper() {
+        return Math.abs(numerator) >= Math.abs(denominator);
+    }
+
+    public boolean isEquivalent(Fraction other) {
+        return (this.numerator * other.denominator) == (this.denominator * other.numerator);
+    }
+
+    public Fraction add(Fraction other) {
+        int commonDenominator = this.denominator * other.denominator;
+        int newNumerator = (this.numerator * other.denominator) + (other.numerator * this.denominator);
+        return new Fraction(newNumerator, commonDenominator).reduce();
+    }
+
+    public Fraction multiply(Fraction other) {
+        int newNumerator = this.numerator * other.numerator;
+        int newDenominator = this.denominator * other.denominator;
+        return new Fraction(newNumerator, newDenominator).reduce();
+    }
+
+    public Fraction divide(Fraction other) {
+        if (other.numerator == 0) {
+            throw new IllegalArgumentException("No se puede dividir por una fracción con numerador cero.");
+        }
+        int newNumerator = this.numerator * other.denominator;
+        int newDenominator = this.denominator * other.numerator;
+        return new Fraction(newNumerator, newDenominator).reduce();
+    }
+
+    private Fraction reduce() {
+        int gcd = gcd(numerator, denominator);
+        return new Fraction(numerator / gcd, denominator / gcd);
+    }
+
+    private int gcd(int a, int b) {
+        return (b == 0) ? Math.abs(a) : gcd(b, a % b);
     }
 
     @Override
