@@ -37,6 +37,15 @@ public class Search {
                 .map(User::getId);
     }
 
+    // 2. Multiply user fractions by last name
+    public Fraction findFractionMultiplicationByUserFamilyName(String familyName) {
+        return findAll()
+                .filter(user -> user.getFamilyName().equals(familyName))
+                .flatMap(user -> user.getFractions().stream())
+                .reduce(new Fraction(1, 1), Fraction::multiply);
+    }
+
+
 
 
 }
