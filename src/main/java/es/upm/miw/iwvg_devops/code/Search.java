@@ -44,6 +44,13 @@ public class Search {
                 .flatMap(user -> user.getFractions().stream())
                 .reduce(new Fraction(1, 1), Fraction::multiply);
     }
+    // 3. Dividir las fracciones del usuario por ID
+    public Fraction findFractionDivisionByUserId(String id) {
+        return findAll()
+                .filter(user -> user.getId().equals(id))
+                .flatMap(user -> user.getFractions().stream())
+                .reduce(new Fraction(1, 1), Fraction::divide);
+    }
 
 
 
